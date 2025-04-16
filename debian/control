@@ -1,15 +1,120 @@
-Source: template-repository
-Section: unknown
+Source: soapysdr
+Section: hamradio
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian Hamradio Maintainers <debian-hams@lists.debian.org>
+Uploaders: Andreas Bombe <aeb@debian.org>
+Build-Depends:
+    debhelper-compat (= 13),
+    dh-python,
+    cmake,
+    swig,
+    python3-dev,
+Build-Depends-Indep:
+    doxygen
+Standards-Version: 4.6.2
+Homepage: https://github.com/pothosware/SoapySDR/wiki
+Vcs-Browser: https://salsa.debian.org/debian-hamradio-team/soapysdr/soapysdr
+Vcs-Git: https://salsa.debian.org/debian-hamradio-team/soapysdr/soapysdr.git
+Rules-Requires-Root: no
 
-Package: template-repository
+Package: libsoapysdr0.8
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: soapysdr0.8-module-all | soapysdr0.8-module
+Description: software defined radio interface library
+ SoapySDR is a library providing a common interface to SDR (software
+ defined radio) hardware. Support for different hardware is added through
+ external modules.
+ .
+ This package contains the shared library.
+
+Package: libsoapysdr-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends:
+    libsoapysdr0.8 (= ${binary:Version}),
+    ${misc:Depends}
+Provides: libsoapysdr0.8-dev
+Suggests: libsoapysdr-doc
+Description: SoapySDR library development files
+ SoapySDR is a library providing a common interface to SDR (software
+ defined radio) hardware. Support for different hardware is added through
+ external modules.
+ .
+ This package contains the development files for the library.
+
+Package: libsoapysdr-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Description: SoapySDR library development documentation
+ SoapySDR is a library providing a common interface to SDR (software
+ defined radio) hardware. Support for different hardware is added through
+ external modules.
+ .
+ This package contains the development documentation for the library.
+
+Package: soapysdr-tools
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Description: software defined radio interface library tools
+ SoapySDR is a library providing a common interface to SDR (software
+ defined radio) hardware. Support for different hardware is added through
+ external modules.
+ .
+ This package contains the SoapySDRUtil command line utility which can
+ list available modules and hardware.
+
+Package: python3-soapysdr
+Section: python
+Architecture: any
+Depends: ${python3:Depends}, ${shlibs:Depends}, ${misc:Depends}
+Recommends: python3-numpy
+Description: SoapySDR Python 3 bindings
+ SoapySDR is a library providing a common interface to SDR (software
+ defined radio) hardware. Support for different hardware is added through
+ external modules.
+ .
+ This package contains the Python 3 bindings for the library.
+
+Package: soapysdr0.8-module-all
+Architecture: any
+Multi-Arch: same
+Depends:
+    soapysdr0.8-module-airspy [!hurd-i386],
+    soapysdr0.8-module-audio [linux-any],
+    soapysdr0.8-module-bladerf [!hurd-i386 !m68k !powerpcspe !sh4],
+    soapysdr0.8-module-hackrf [!hurd-i386],
+    soapysdr0.8-module-lms7 [!powerpcspe],
+    soapysdr0.8-module-mirisdr [!hurd-i386],
+    soapysdr0.8-module-osmosdr [!hurd-i386],
+    soapysdr0.8-module-redpitaya,
+    soapysdr0.8-module-remote,
+    soapysdr0.8-module-rfspace [!hurd-i386],
+    soapysdr0.8-module-rtlsdr [!hurd-i386],
+    soapysdr0.8-module-uhd,
+    ${misc:Depends}
+Description: All device support for SoapySDR (metapackage)
+ SoapySDR is a library providing a common interface to SDR (software
+ defined radio) hardware. Support for different hardware is added through
+ external modules.
+ .
+ This dependency package pulls in all available device support module packages.
+ You can remove this package if you prefer to pick and choose modules to
+ install.
+
+Package: soapysdr-module-all
+Architecture: any
+Multi-Arch: same
+Depends: soapysdr0.8-module-all, ${misc:Depends}
+Description: All device support for default version of SoapySDR (metapackage)
+ SoapySDR is a library providing a common interface to SDR (software
+ defined radio) hardware. Support for different hardware is added through
+ external modules.
+ .
+ This package depends on the metapackage which in turn depends on all available
+ device support packages for the default version of libsoapysdr.

@@ -1,5 +1,222 @@
-template-repository (1.0-1) unstable; urgency=medium
+soapysdr (0.8.1-5) unstable; urgency=medium
 
-  * Initial release
+  * Team upload
+  * Drop build-dep on python3-distutils and add patch (Closes: #1065598)
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- tony mancill <tmancill@debian.org>  Sat, 06 Jul 2024 21:08:00 -0700
+
+soapysdr (0.8.1-4) unstable; urgency=medium
+
+  * Remove Breaks: libsoapysdr0.7 as it breaks co-installability with
+    libsoapysdr0.7
+  * Adapt d/watch to GitHub changes
+  * Stop specifying --as-needed linker flag, it is the default now
+  * Bump Standards-Version to 4.6.2, no changes required
+
+ -- Andreas Bombe <aeb@debian.org>  Fri, 08 Sep 2023 01:27:36 +0530
+
+soapysdr (0.8.1-3) unstable; urgency=medium
+
+  * Team upload
+  * libsoapysdr0.8: Add Breaks: libsoapysdr0.7 for smoother upgrades from
+    bullseye.  (Closes: #1036737)
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 24 May 2023 09:35:42 +0200
+
+soapysdr (0.8.1-2) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Andreas Bombe <aeb@debian.org>  Tue, 07 Sep 2021 00:29:41 +0200
+
+soapysdr (0.8.1-1) experimental; urgency=medium
+
+  * New upstream version 0.8.1
+  * Change library ABI version in package names and dependencies from 0.7
+    to 0.8
+  * Add Rules-Requires-Root field to d/control
+  * Update copyright lines in d/copyright
+  * Refresh version-string patch
+  * Bump Standards-Version to 4.6.0, no changes required
+
+ -- Andreas Bombe <aeb@debian.org>  Wed, 25 Aug 2021 22:05:35 +0200
+
+soapysdr (0.7.2-2) unstable; urgency=medium
+
+  [ Christoph Berg ]
+  * soapysdr0.7-module-all: Add dependencies on soapysdr0.7-module-mirisdr
+    and soapysdr0.7-module-rfspace. Spotted by Daniele Forsi, thanks!
+    (Closes: #948624)
+
+  [ Debian Janitor ]
+  * Set debhelper-compat version in Build-Depends.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+  [ Andreas Bombe ]
+  * Increase debhelper compat level to 13
+  * Bump Standards-Version to 4.5.1, no changes required
+
+ -- Andreas Bombe <aeb@debian.org>  Fri, 05 Mar 2021 02:26:10 +0100
+
+soapysdr (0.7.2-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version compatible with python 3.8.
+
+ -- Christoph Berg <myon@debian.org>  Wed, 04 Mar 2020 20:26:10 +0100
+
+soapysdr (0.7.1-3) unstable; urgency=medium
+
+  * Team upload.
+  * Drop python2 module. (Closes: #938510)
+  * Add debian/gitlab-ci.yml; disable reprotest for now.
+  * Add autopkgtest along the contents of .travis.yml.
+
+ -- Christoph Berg <myon@debian.org>  Tue, 24 Dec 2019 22:57:15 +0100
+
+soapysdr (0.7.1-2) unstable; urgency=medium
+
+  * Upload to unstable
+  * Increase debhelper compat level to 12
+  * Bump Standards-Version to 4.4.1, no changes required
+
+ -- Andreas Bombe <aeb@debian.org>  Sat, 19 Oct 2019 19:17:56 +0200
+
+soapysdr (0.7.1-1) experimental; urgency=medium
+
+  * New upstream version 0.7.1
+  * Change library ABI version in package names and dependencies from 0.6
+    to 0.7
+  * Bump Standards-Version to 4.4.0, no changes required
+  * Update copyright lines in debian/copyright
+
+ -- Andreas Bombe <aeb@debian.org>  Thu, 12 Sep 2019 01:30:42 +0200
+
+soapysdr (0.6.1-4) unstable; urgency=medium
+
+  * Build-Depend on python*-dev instead of python*-all-dev (Closes: 904095)
+  * Bump Standards-Version to 4.2.0, no changes required
+
+ -- Andreas Bombe <aeb@debian.org>  Wed, 22 Aug 2018 01:43:50 +0200
+
+soapysdr (0.6.1-3) unstable; urgency=medium
+
+  * Adapt Vcs-* fields in debian/control to changed path on salsa.debian.org
+  * Add Build-Depends on python3-distutils since it isn't pulled in by
+    python3 anymore
+  * Use https URL for debian/copyright Format header
+
+ -- Andreas Bombe <aeb@debian.org>  Fri, 23 Mar 2018 02:18:49 +0100
+
+soapysdr (0.6.1-2) unstable; urgency=medium
+
+  * Let python3-soapysdr recommend the correct python3-numpy instead of
+    python-numpy
+  * Make use of dh-python for Python library packages
+  * Change Vcs fields in debian/control to point to new repository location
+    on salsa.debian.org
+  * Bump Standards-Version to 4.1.3, no changes required
+  * Increase debhelper compat level to 11
+  * Remove lintian override for doxygen embedded javascript library, not
+    needed anymore
+
+ -- Andreas Bombe <aeb@debian.org>  Mon, 05 Feb 2018 03:29:42 +0100
+
+soapysdr (0.6.1-1) unstable; urgency=medium
+
+  * New upstream version 0.6.1
+  * Bump Standards-Version to 4.1.2, no changes required
+
+ -- Andreas Bombe <aeb@debian.org>  Sun, 17 Dec 2017 22:12:11 +0100
+
+soapysdr (0.6.0-2) unstable; urgency=medium
+
+  * Let libsoapysdr-dev provide libsoapysdr0.6-dev so that module packages
+    can Build-Depend on a version matching their binary package names
+  * Bump Standards-Version to 4.0.1, no changes required
+
+ -- Andreas Bombe <aeb@debian.org>  Sun, 06 Aug 2017 12:12:35 -0400
+
+soapysdr (0.6.0-1) unstable; urgency=medium
+
+  * New upstream version 0.6.0
+  * Change library ABI version in package names and dependencies from 0.5-2
+    to 0.6
+  * Update copyright years in debian/copyright
+  * Add soapysdr0.6-module-osmosdr dependency to the soapysdr0.6-module-all
+    metapackage
+  * Bump Standards-Version to 4.0.0, no changes required
+  * Fix CMake warning for mismatched logical block arguments in version-string
+    patch
+  * Include pkg-info.mk in debian/rules instead of setting DEB_VERSION
+    manually with dpkg-parsechangelog
+
+ -- Andreas Bombe <aeb@debian.org>  Tue, 27 Jun 2017 02:57:04 +0200
+
+soapysdr (0.5.4-1) unstable; urgency=medium
+
+  * New upstream version 0.5.4
+  * Refresh version-string patch
+  * Add airspy, lms7 and redpitaya dependencies to soapysdr0.5-2-module-all
+  * Mask dependencies of soapysdr0.5-2-module-all for architectures where
+    the modules can't be built
+  * Remove man page for SoapySDRUtil, merged upstream
+  * Remove unnecessary dh_installchangelogs override from debian/rules
+  * Link with --as-needed
+
+ -- Andreas Bombe <aeb@debian.org>  Fri, 06 Jan 2017 19:24:08 +0100
+
+soapysdr (0.5.3-2) unstable; urgency=medium
+
+  * Add man page for SoapySDRUtil
+  * Add hackrf, remote and uhd dependencies to soapysdr0.5-2-module-all
+  * Add appropriate Multi-Arch headers to libsoapysdr-dev, libsoapysdr-doc,
+    soapysdr0.5-2-module-all, soapysdr-module-all
+  * Move debhelper compat level from 9 to 10
+  * Call dh_doxygen after dh_installdocs
+
+ -- Andreas Bombe <aeb@debian.org>  Sat, 19 Nov 2016 23:09:15 +0100
+
+soapysdr (0.5.3-1) unstable; urgency=medium
+
+  * New upstream version 0.5.3
+  * Add soapysdr-module-all metapackages that depend on all available
+    module packages and let libsoapysdr recommend it as the first
+    alternative to the virtual soapysdr-module package
+
+ -- Andreas Bombe <aeb@debian.org>  Mon, 19 Sep 2016 20:00:52 +0200
+
+soapysdr (0.5.2-1) unstable; urgency=medium
+
+  * New upstream version 0.5.2
+  * Add patch install-dev-docs to make the build install the HTML
+    documentation files
+  * Add Build-Depends-Indep on doxygen and create new architecture all
+    package libsoapysdr-doc
+
+ -- Andreas Bombe <aeb@debian.org>  Wed, 24 Aug 2016 04:06:10 +0200
+
+soapysdr (0.5.1-1) unstable; urgency=medium
+
+  * New upstream version 0.5.1
+    - Modules are now searched in ABI versioned path to facilitate
+      parallel installation of multiple libsoapysdr ABI versions
+  * Recommend module virtual package in shared library package which is
+    provided by hardware support module packages
+  * Add DEP3 header to version-string patch
+
+ -- Andreas Bombe <aeb@debian.org>  Mon, 15 Aug 2016 20:45:32 +0200
+
+soapysdr (0.4.3+git20160605-2) unstable; urgency=medium
+
+  * Remove symbols file again, too much work for a C++ library for now
+  * Move to team maintenance by the hamradio team
+
+ -- Andreas Bombe <aeb@debian.org>  Sun, 10 Jul 2016 13:45:50 +0200
+
+soapysdr (0.4.3+git20160605-1) unstable; urgency=medium
+
+  * Initial release. (Closes: #827709)
+
+ -- Andreas Bombe <aeb@debian.org>  Fri, 08 Jul 2016 16:15:23 +0200

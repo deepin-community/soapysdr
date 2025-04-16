@@ -1,4 +1,31 @@
 #!/usr/bin/make -f
+# -*- makefile -*-
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# for definition of DEB_VERSION
+include /usr/share/dpkg/pkg-info.mk
+
+# extract the architecture for setting the library path suffix
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
 
 %:
-	dh $@
+	dh $@ --buildsystem=cmake --with=python3
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_AUTOSET_INSTALL_RPATH=FALSE \
+		-DLIB_SUFFIX="/$(DEB_HOST_MULTIARCH)" \
+		-DOVERRIDE_SOAPY_SDR_VERSION="$(DEB_VERSION)"
+
+override_dh_installdocs-arch:
+	dh_installdocs -p soapysdr-module-all \
+		--link-doc=soapysdr0.8-module-all
+	dh_installdocs --arch --remaining-packages
+
+override_dh_installdocs-indep:
+	dh_installdocs --indep
+	dh_doxygen --indep

@@ -1,0 +1,7 @@
+Depends: soapysdr-tools
+Tests: SoapySDRUtil
+Restrictions: allow-stderr
+
+Depends: python3-soapysdr
+Tests: python3
+Restrictions: allow-stderr
