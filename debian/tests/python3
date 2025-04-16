@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -eux
+
+python3 -c "import SoapySDR; print(SoapySDR.getAPIVersion())"
+python3 -c "from SoapySDR import *; print(SOAPY_SDR_ABI_VERSION)"
+python3 -c "from SoapySDR import *; print(SOAPY_SDR_TIMEOUT)"
+python3 -c "import SoapySDR; print(SoapySDR.errToStr(SoapySDR.SOAPY_SDR_TIMEOUT))"
+python3 -c "import SoapySDR; print(SoapySDR.Device.make('driver=null'))"

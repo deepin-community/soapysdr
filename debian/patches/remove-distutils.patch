@@ -1,0 +1,24 @@
+Description: replace distutils.sysconfig.get_python_lib()
+ with sysconfig.get_path()
+Author: tony mancill <tmancill@debian.org>
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1065958
+
+--- a/python/get_python_lib.py
++++ b/python/get_python_lib.py
+@@ -1,13 +1,13 @@
+ import os
+ import sys
+ import site
+-from distutils.sysconfig import get_python_lib
++from sysconfig import get_path
+ 
+ if __name__ == '__main__':
+     prefix = sys.argv[1]
+ 
+-    #ask distutils where to install the python module
+-    install_dir = get_python_lib(plat_specific=True, prefix=prefix)
++    #ask sysconfig where to install the python module
++    install_dir = get_path('platlib', 'posix_user', {'userbase': prefix})
+ 
+     #use sites when the prefix is already recognized
+     try:

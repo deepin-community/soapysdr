@@ -1,0 +1,19 @@
+Description: Install API reference manual
+ The HTML reference manual that is built when doxygen is available is
+ not installed in the upstream cmake scripts. This patch changes that
+ to install them in /usr/share/doc/libsoapysdr-doc/html for later
+ installation in its own package.
+Author: Andreas Bombe <aeb@debian.org>
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/docs/CMakeLists.txt
++++ b/docs/CMakeLists.txt
+@@ -42,4 +42,8 @@
+         COMMENT "Generating documentation with doxygen"
+     )
+     add_custom_target(docs ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR_DOXYGEN})
++    install(
++	DIRECTORY ${CMAKE_CURRENT_BINARY_DIR_DOXYGEN}
++	DESTINATION share/doc/libsoapysdr-doc
++    )
+ endif()

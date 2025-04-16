@@ -1,0 +1,48 @@
+Description: Allow overriding version string
+ Add an override option for the version string in CMakeLists.txt. The
+ original tries to combine its own string and EXTVER, so to make this
+ the Debian package version we would have to filter out the version
+ number from the changelog version.
+ .
+ Using the override we can simply pass the whole Debian version in
+ without using complex sed or awk filtering.
+Author: Andreas Bombe <aeb@debian.org>
+
+Index: git/CMakeLists.txt
+===================================================================
+--- git.orig/CMakeLists.txt	2021-08-25 19:32:53.240916255 +0200
++++ git/CMakeLists.txt	2021-08-25 19:32:53.236916245 +0200
+@@ -34,18 +34,22 @@
+ endif(NOT CHANGELOG_MATCH)
+ set(SOAPY_SDR_LIBVER "${CMAKE_MATCH_1}")
+ 
+-if (NOT SOAPY_SDR_EXTVER)
+-    include(${PROJECT_SOURCE_DIR}/cmake/Modules/GetGitRevisionDescription.cmake)
+-    get_git_head_revision(GITREFSPEC GITHASH)
+-    if (GITHASH)
+-        string(SUBSTRING "${GITHASH}" 0 8 GITHASH)
+-        set(SOAPY_SDR_EXTVER "g${GITHASH}")
+-    else (GITHASH)
+-        set(SOAPY_SDR_EXTVER "unknown")
+-    endif (GITHASH)
+-endif()
++if (NOT OVERRIDE_SOAPY_SDR_VERSION)
++    if (NOT SOAPY_SDR_EXTVER)
++	include(${PROJECT_SOURCE_DIR}/cmake/Modules/GetGitRevisionDescription.cmake)
++	get_git_head_revision(GITREFSPEC GITHASH)
++	if (GITHASH)
++	    string(SUBSTRING "${GITHASH}" 0 8 GITHASH)
++	    set(SOAPY_SDR_EXTVER "g${GITHASH}")
++	else (GITHASH)
++	    set(SOAPY_SDR_EXTVER "unknown")
++	endif (GITHASH)
++    endif()
+ 
+-set(SOAPY_SDR_VERSION "${SOAPY_SDR_LIBVER}-${SOAPY_SDR_EXTVER}")
++    set(SOAPY_SDR_VERSION "${SOAPY_SDR_LIBVER}-${SOAPY_SDR_EXTVER}")
++else (NOT OVERRIDE_SOAPY_SDR_VERSION)
++    set(SOAPY_SDR_VERSION "${OVERRIDE_SOAPY_SDR_VERSION}")
++endif (NOT OVERRIDE_SOAPY_SDR_VERSION)
+ 
+ #SOAPY_SDR_ROOT is compiled into the library to locate the install base.
+ #By default, the SOAPY_SDR_ROOT is set to the CMAKE_INSTALL_PREFIX.

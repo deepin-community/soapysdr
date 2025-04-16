@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -eux
+
+SoapySDRUtil --info
+SoapySDRUtil --check=null
+SoapySDRUtil --make="driver=null"

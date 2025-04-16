@@ -1,0 +1,6 @@
+include:
+  - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/salsa-ci.yml
+  - https://salsa.debian.org/salsa-ci-team/pipeline/raw/master/pipeline-jobs.yml
+
+variables:
+  SALSA_CI_DISABLE_REPROTEST: 'yes' # r-b.net says we are reproducible, but reprotest disagrees with a giant diff. Disable for now.
